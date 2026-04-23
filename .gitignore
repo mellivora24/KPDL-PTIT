@@ -67,6 +67,12 @@ yarn-error.log*
 *.cache
 *.dat
 
+*.dwproj.user
+.vs/
+*.suo
+*.user
+cube/
+
 # ETL temp
 BTL-DW/layer_2/etl/tmp/
 BTL-DW/layer_2/etl/cache/
@@ -102,3 +108,25 @@ BTL-DW/scripts/tmp/
 *.zip
 *.tar.gz
 *.rar
+
+# ========================
+# ENV (must ignore)
+# ========================
+.env
+.env.*
+
+# ========================
+# Visual Studio / SSAS
+# ========================
+.vs/
+*.suo
+*.user
+*.dwproj.user
+bin/
+obj/
+
+# ========================
+# Python
+# ========================
+__pycache__/
+*.pyc
