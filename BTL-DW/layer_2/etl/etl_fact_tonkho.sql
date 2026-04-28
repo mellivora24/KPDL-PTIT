@@ -19,7 +19,7 @@
 -- PHAI CHAY etl_dimension.sql TRUOC
 -- ============================================================
 
-USE DW_PROJECT;
+USE DATA_WAREHOUSE;
 GO
 
 PRINT '>> Dang xu ly Fact_TonKho...';

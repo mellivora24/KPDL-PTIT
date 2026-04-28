@@ -3,6 +3,9 @@
 -- Ho tro cac phep: Roll-up, Drill-down, Slice, Dice
 -- ============================================================
 
+USE DATA_WAREHOUSE;
+GO
+
 -- Fact_TonKho
 IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_TonKho_ThoiGian')
     CREATE NONCLUSTERED INDEX IX_TonKho_ThoiGian ON dbo.Fact_TonKho (MaThoiGian);

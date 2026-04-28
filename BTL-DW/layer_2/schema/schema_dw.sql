@@ -4,8 +4,8 @@
 -- Updated: Bo FK tu Dim_KhachHang -> Dim_VanPhongDaiDien
 --          (VPDD khong quan ly khach hang, chi quan ly cua hang)
 -- ============================================================
--- CREATE DATABASE DATA_WAREHOUSE;
--- GO
+CREATE DATABASE DATA_WAREHOUSE;
+GO
 
 USE DATA_WAREHOUSE;
 GO

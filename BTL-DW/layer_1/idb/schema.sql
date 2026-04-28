@@ -170,9 +170,10 @@ GO
 -- ============================================================
 -- 8. MATHANGDUOCLUUTRU
 -- Nguon: SalesDB
--- Loai: SR1 → Quan he M:N (CuaHang × MatHang)
---   Khoa chinh composite: (MaCuaHang, MaMH)
---   Ca hai deu la KAP (khoa ngoai trong PK)
+-- Loai: SR1 → Quan he M:N (CuaHang × MatHang) + Snapshot Thang
+--   Khoa chinh composite: (MaCuaHang, MaMH, ThoiGianLuuTru)
+--   Luu lai lich su ton kho theo tung thang
+--   Moi thang 1 ban ghi snapshot cuoi thang cho moi cap (CH, MH)
 -- ============================================================
 CREATE TABLE dbo.MatHangDuocLuuTru (
     MaCuaHang       VARCHAR(10) NOT NULL,   -- KAP → CuaHang
@@ -181,7 +182,7 @@ CREATE TABLE dbo.MatHangDuocLuuTru (
     ThoiGianLuuTru  DATETIME2   NOT NULL DEFAULT GETDATE(),
 
     CONSTRAINT PK_MatHangDuocLuuTru
-        PRIMARY KEY (MaCuaHang, MaMH),
+        PRIMARY KEY (MaCuaHang, MaMH, ThoiGianLuuTru),
     CONSTRAINT FK_LuuTru_CuaHang
         FOREIGN KEY (MaCuaHang)
         REFERENCES dbo.CuaHang (MaCuaHang),

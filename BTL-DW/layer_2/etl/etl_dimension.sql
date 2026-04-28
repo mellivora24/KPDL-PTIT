@@ -3,7 +3,7 @@
 -- Anh xa du lieu tu IDB vao cac bang Dimension cua DW
 -- ============================================================
 
-USE DW_PROJECT;
+USE DATA_WAREHOUSE;
 GO
 
 -- ============================================================
