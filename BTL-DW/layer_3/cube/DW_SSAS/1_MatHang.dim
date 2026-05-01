@@ -1,0 +1,218 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="4766f422-12d9-4f87-88f5-7dbc52434fae" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>1_MatHang</ID>
+  <Name>1_MatHang</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="3" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-1718" scrolltop="-3514" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="7303" y="6562" backcolor="2039583" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="010000009001b0300100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="Dim_MatHang" left="20" top="0" logicalid="2" controlid="1" masterid="0" hint1="0" hint2="0" width="3000" height="2667" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000e0000b80b00006b0a0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_Dim_MatHang" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-1718</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-3514</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ARDiagramLayout</Name>
+      <Value>
+        <DiagramLayout ZoomPercent="100" ViewPortX="0" ViewPortY="0" xmlns="">
+          <Shapes NodeWidth="147">
+            <Shape Id="Ma Mat Hang" Expanded="true">
+              <Attributes>
+                <Attribute Id="Ma Mat Hang" />
+                <Attribute Id="Gia" />
+                <Attribute Id="Kich Thuoc" />
+                <Attribute Id="Mo Ta" />
+                <Attribute Id="Trong Luong" />
+              </Attributes>
+              <Position x="20" y="20" />
+            </Shape>
+          </Shapes>
+        </DiagramLayout>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="9b23c3ee-3b92-4318-9f99-6bb5a7a7a0f9">
+    <DataSourceViewID>DATA WAREHOUSE</DataSourceViewID>
+  </Source>
+  <ErrorConfiguration dwd:design-time-name="621c2c39-6c9b-4f8c-83fb-2375a4cdc3ca">
+    <KeyNotFound>ReportAndStop</KeyNotFound>
+    <KeyDuplicate>ReportAndStop</KeyDuplicate>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <Attributes>
+    <Attribute dwd:design-time-name="c2029a73-21d7-4e3a-b893-9eb29059ba4a">
+      <ID>Ma Mat Hang</ID>
+      <Name>Ma Mat Hang</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="c0d6a466-ead3-4b45-85e3-97247044cde7">
+          <DataType>WChar</DataType>
+          <DataSize>10</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="5e4b1371-1cae-4eec-a393-4b995336ecd8">
+            <TableID>dbo_Dim_MatHang</TableID>
+            <ColumnID>MaMatHang</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="a63cd72a-7fd8-473a-8f36-9d6e0b3a9503">
+          <AttributeID>Mo Ta</AttributeID>
+          <Name>Mo Ta</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="495d409d-9825-48ca-a61f-50274455cc96">
+          <AttributeID>Kich Thuoc</AttributeID>
+          <Name>Kich Thuoc</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="0c97099a-fd6f-40ea-b6e9-50f1cbcc1661">
+          <AttributeID>Trong Luong</AttributeID>
+          <Name>Trong Luong</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="e3f70a2e-d976-4c3a-add0-c1a103f064c3">
+          <AttributeID>Gia</AttributeID>
+          <Name>Gia</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="be5c9042-3211-4ed7-9067-56a91f5d49b0">
+      <ID>Mo Ta</ID>
+      <Name>Mo Ta</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="2893b743-02aa-4bff-981f-e5aee44be8b7">
+          <DataType>WChar</DataType>
+          <DataSize>500</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="0645cef9-9921-4048-a7ac-0861ba721288">
+            <TableID>dbo_Dim_MatHang</TableID>
+            <ColumnID>MoTa</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="009cdf2a-e153-4387-b963-9d47aeb4b40f">
+      <ID>Kich Thuoc</ID>
+      <Name>Kich Thuoc</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="7217ba81-6b47-42b9-b3bc-f42e5d9add4d">
+          <DataType>WChar</DataType>
+          <DataSize>50</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="5205f407-0447-4acb-9b91-9ec2d4331b81">
+            <TableID>dbo_Dim_MatHang</TableID>
+            <ColumnID>KichThuoc</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="544c3efc-d0bb-4614-9713-7839267e5e65">
+      <ID>Trong Luong</ID>
+      <Name>Trong Luong</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="546faa3f-8596-4e0d-9d0f-fb41716234f5">
+          <DataType>Double</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="1b9dd197-60c3-42cf-a653-ffa1a05844a3">
+            <TableID>dbo_Dim_MatHang</TableID>
+            <ColumnID>TrongLuong</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="d24e0fcb-e006-4dbf-9896-a4420c1d198b">
+      <ID>Gia</ID>
+      <Name>Gia</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="3630840f-4fea-486f-9af8-604401f59941">
+          <DataType>Double</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="df825edb-2821-4131-9b7e-eb16c8ceaff5">
+            <TableID>dbo_Dim_MatHang</TableID>
+            <ColumnID>Gia</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <Hierarchies>
+    <Hierarchy dwd:design-time-name="0c0f1a0a-b0f5-4c0e-acb3-8f7e1640668b">
+      <ID>Hierarchy</ID>
+      <Name>PhanCap_KH</Name>
+      <Levels>
+        <Level dwd:design-time-name="5054ec92-e77a-4652-9a7b-178e1ff63370">
+          <ID>Ma Mat Hang</ID>
+          <Name>Ma Mat Hang</Name>
+          <SourceAttributeID>Ma Mat Hang</SourceAttributeID>
+        </Level>
+      </Levels>
+    </Hierarchy>
+  </Hierarchies>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>

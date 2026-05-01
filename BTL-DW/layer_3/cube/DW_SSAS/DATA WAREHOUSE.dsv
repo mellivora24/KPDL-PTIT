@@ -1,0 +1,528 @@
+﻿<DataSourceView xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="9745ef45-d813-4275-bc40-6e03b39aad22" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>DATA WAREHOUSE</ID>
+  <Name>DATA WAREHOUSE</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CurrentLayout</Name>
+      <Value>_ALL_TABLES_</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:SchemaRestriction</Name>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:RetrieveRelationships</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:Layouts</Name>
+      <Value>
+        <Layouts xmlns="">
+          <Diagram>
+            <Name>_ALL_TABLES_</Name>
+            <DiagramLayout>
+              <dds>
+                <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="31" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-1310" scrolltop="-2380" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="80" x="17463" y="10986" backcolor="2039583" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+                  <font>
+                    <ddsxmlobjectstreamwrapper binary="010000009001b0300100065461686f6d61" />
+                  </font>
+                  <mouseicon>
+                    <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+                  </mouseicon>
+                </diagram>
+                <layoutmanager>
+                  <ddsxmlobj />
+                </layoutmanager>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="Dim_CuaHang" left="12015" top="9774" logicalid="15" controlid="1" masterid="0" hint1="0" hint2="0" width="3000" height="1947" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000b80b00009b070000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_Dim_CuaHang" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="Dim_KhachHang" left="0" top="9594" logicalid="16" controlid="2" masterid="0" hint1="0" hint2="0" width="4043" height="3027" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000cb0f0000d30b0000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_Dim_KhachHang" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="Dim_MatHang" left="6523" top="5766" logicalid="17" controlid="3" masterid="0" hint1="0" hint2="0" width="3000" height="2667" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000b80b00006b0a0000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_Dim_MatHang" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="Dim_ThoiGian" left="12015" top="0" logicalid="18" controlid="4" masterid="0" hint1="0" hint2="0" width="3000" height="2307" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000b80b000003090000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_Dim_ThoiGian" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="Fact_BanHang" left="995" top="4527" logicalid="19" controlid="5" masterid="0" hint1="0" hint2="0" width="3048" height="2667" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000e80b00006b0a0000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_Fact_BanHang" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="Fact_TonKho" left="11843" top="4707" logicalid="20" controlid="6" masterid="0" hint1="0" hint2="0" width="3344" height="2667" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000100d00006b0a0000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_Fact_TonKho" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="9223" top="5600" logicalid="21" controlid="7" masterid="0" hint1="0" hint2="0" width="2920" height="799" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="16448250" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_TonKho_MatHang]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="3" destid="6" sourceattachpoint="11" destattachpoint="14" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="9523" y="5999" />
+                    <point x="10683" y="5999" />
+                    <point x="10683" y="6040" />
+                    <point x="11843" y="6040" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="13116" top="1808" logicalid="22" controlid="8" masterid="0" hint1="0" hint2="0" width="799" height="3199" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="16448250" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_TonKho_ThoiGian]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="4" destid="6" sourceattachpoint="5" destattachpoint="4" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="13515" y="2307" />
+                    <point x="13515" y="4707" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="13116" top="7074" logicalid="23" controlid="9" masterid="0" hint1="0" hint2="0" width="799" height="3200" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="16448250" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_TonKho_CuaHang]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="1" destid="6" sourceattachpoint="4" destattachpoint="5" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="13515" y="9774" />
+                    <point x="13515" y="7374" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="3743" top="6110" logicalid="24" controlid="10" masterid="0" hint1="0" hint2="0" width="3080" height="1389" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="16448250" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_BanHang_MatHang]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="3" destid="5" sourceattachpoint="14" destattachpoint="17" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="6523" y="7099" />
+                    <point x="5243" y="7099" />
+                    <point x="5243" y="6410" />
+                    <point x="4043" y="6410" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="3743" top="754" logicalid="25" controlid="11" masterid="0" hint1="0" hint2="0" width="8572" height="4306" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="16448250" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_BanHang_ThoiGian]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="4" destid="5" sourceattachpoint="12" destattachpoint="11" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="12015" y="1153" />
+                    <point x="8029" y="1153" />
+                    <point x="8029" y="4760" />
+                    <point x="4043" y="4760" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="1622" top="6894" logicalid="26" controlid="12" masterid="0" hint1="0" hint2="0" width="1197" height="3200" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="16448250" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_BanHang_KhachHang]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="2" destid="5" sourceattachpoint="6" destattachpoint="5" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="2021" y="9594" />
+                    <point x="2021" y="8394" />
+                    <point x="2519" y="8394" />
+                    <point x="2519" y="7194" />
+                  </connector>
+                </ddscontrol>
+                <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge" tooltip="Dim_VanPhongDaiDien" left="11546" top="12533" logicalid="27" controlid="13" masterid="0" hint1="0" hint2="0" width="3000" height="2180" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobjectstreaminitwrapper binary="000e0000b80b000084080000" />
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dbo_Dim_VanPhongDaiDien" vartype="8" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <shape groupshapeid="0" groupnode="0" />
+                </ddscontrol>
+                <ddscontrol controlprogid="MSDDS.Polyline.080.1" left="12097" top="11421" logicalid="28" controlid="14" masterid="0" hint1="0" hint2="0" width="799" height="1612" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+                  <control>
+                    <ddsxmlobj>
+                      <polyline endtypedst="6" endtypesrc="3" usercolor="16448250" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+                    </ddsxmlobj>
+                  </control>
+                  <layoutobject>
+                    <ddsxmlobj>
+                      <property name="LogicalObject" value="dataSet.Relations[FK_CuaHang_VanPhong]" vartype="8" />
+                      <property name="Virtual" value="0" vartype="11" />
+                      <property name="VisibleAP" value="0" vartype="3" />
+                    </ddsxmlobj>
+                  </layoutobject>
+                  <connector lineroutestyle="MSDDS.Rectilinear" sourceid="13" destid="1" sourceattachpoint="2" destattachpoint="1" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+                    <point x="12496" y="12533" />
+                    <point x="12496" y="12127" />
+                    <point x="12415" y="12127" />
+                    <point x="12415" y="11721" />
+                  </connector>
+                </ddscontrol>
+              </dds>
+</DiagramLayout>
+            <ShowRelationshipNames>False</ShowRelationshipNames>
+            <UseDiagramDefaultLayout>True</UseDiagramDefaultLayout>
+            <DiagramViewPortLeft>-1310</DiagramViewPortLeft>
+            <DiagramViewPortTop>-2380</DiagramViewPortTop>
+            <DiagramBoundingLeft>0</DiagramBoundingLeft>
+            <DiagramBoundingTop>0</DiagramBoundingTop>
+            <DiagramZoom>80</DiagramZoom>
+          </Diagram>
+        </Layouts>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <DataSourceID>DATA WAREHOUSE</DataSourceID>
+  <Schema>
+    <xs:schema id="DATA_x0020_WAREHOUSE" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+      <xs:element name="DATA_x0020_WAREHOUSE" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:design-time-name="937e78aa-f7cb-4f44-a2f3-78f37abba06b">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="dbo_Dim_CuaHang" msprop:DbSchemaName="dbo" msprop:design-time-name="208c9ccc-3098-4477-9674-78be27619ce2" msprop:FriendlyName="Dim_CuaHang" msprop:TableType="Table" msprop:DbTableName="Dim_CuaHang">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="MaCuaHang" msprop:FriendlyName="MaCuaHang" msprop:DbColumnName="MaCuaHang" msprop:design-time-name="ed4eab00-864c-417a-ac8c-99f2f4d51d9d">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="MaThanhPho" msprop:FriendlyName="MaThanhPho" msprop:DbColumnName="MaThanhPho" msprop:design-time-name="de3008b9-6d63-4094-bb17-2525dce4039d">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="SDT" msprop:FriendlyName="SDT" msprop:DbColumnName="SDT" msprop:design-time-name="0963f5d1-d2e3-49fa-9095-25dd1e5427c6">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Dim_KhachHang" msprop:DbSchemaName="dbo" msprop:design-time-name="e0714282-8b68-4094-9531-fe27f9b2c5da" msprop:FriendlyName="Dim_KhachHang" msprop:TableType="Table" msprop:DbTableName="Dim_KhachHang">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="MaKhachHang" msprop:FriendlyName="MaKhachHang" msprop:DbColumnName="MaKhachHang" msprop:design-time-name="b9471a9e-d26a-466c-b46c-e27e216d20de">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="TenKhachHang" msprop:FriendlyName="TenKhachHang" msprop:DbColumnName="TenKhachHang" msprop:design-time-name="da2a188a-6987-4920-b87b-60e8544206b5">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="MaThanhPho" msprop:FriendlyName="MaThanhPho" msprop:DbColumnName="MaThanhPho" msprop:design-time-name="f049fb30-0618-48d4-99df-2da3ff59b485">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="LoaiKhachHang" msprop:FriendlyName="LoaiKhachHang" msprop:DbColumnName="LoaiKhachHang" msprop:design-time-name="c39eb18f-075a-4d03-b763-b27a2d6dcda5" type="xs:unsignedByte" />
+                  <xs:element name="HuongDanVienDuLich" msprop:FriendlyName="HuongDanVienDuLich" msprop:DbColumnName="HuongDanVienDuLich" msprop:design-time-name="913521d2-be64-4eed-8d3d-f3df73ae9960" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="DiaChiBuuDien" msprop:FriendlyName="DiaChiBuuDien" msprop:DbColumnName="DiaChiBuuDien" msprop:design-time-name="bfd778a3-9712-41f4-8bc2-338f976a5b2c" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Dim_MatHang" msprop:DbSchemaName="dbo" msprop:design-time-name="57d7737d-0bb3-47ac-99b2-2d7ce1ddd794" msprop:FriendlyName="Dim_MatHang" msprop:TableType="Table" msprop:DbTableName="Dim_MatHang">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="MaMatHang" msprop:FriendlyName="MaMatHang" msprop:DbColumnName="MaMatHang" msprop:design-time-name="43a2f8a8-2ab7-4bb9-b15d-e39245b384a6">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="MoTa" msprop:FriendlyName="MoTa" msprop:DbColumnName="MoTa" msprop:design-time-name="cd8b48ee-c28d-4855-b5e7-c9d6364c6886" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="500" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="KichThuoc" msprop:FriendlyName="KichThuoc" msprop:DbColumnName="KichThuoc" msprop:design-time-name="5805b134-d703-468a-8c86-92c95b600978" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="TrongLuong" msprop:FriendlyName="TrongLuong" msprop:DbColumnName="TrongLuong" msprop:design-time-name="9fc6a646-7ea2-4aff-98ea-6e4908d6ddcc" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Gia" msprop:FriendlyName="Gia" msprop:DbColumnName="Gia" msprop:design-time-name="4e508dd6-0f0a-4dea-9618-c01dd0775d30" type="xs:decimal" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Dim_ThoiGian" msprop:DbSchemaName="dbo" msprop:design-time-name="682270cc-ba2f-4adc-a6e1-547d707a10ad" msprop:FriendlyName="Dim_ThoiGian" msprop:TableType="Table" msprop:DbTableName="Dim_ThoiGian">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="MaThoiGian" msprop:FriendlyName="MaThoiGian" msprop:DbColumnName="MaThoiGian" msprop:design-time-name="650c0214-8046-4407-a1f4-868d13da5e6a" type="xs:int" />
+                  <xs:element name="Thang" msprop:FriendlyName="Thang" msprop:DbColumnName="Thang" msprop:design-time-name="0d0a61f3-44ab-4ec3-8d1e-cf2643864fac" type="xs:unsignedByte" />
+                  <xs:element name="Quy" msprop:FriendlyName="Quy" msprop:DbColumnName="Quy" msprop:design-time-name="9b2cc6d0-621a-4aa9-8c7d-1dc1bc69dd33" type="xs:unsignedByte" />
+                  <xs:element name="Nam" msprop:FriendlyName="Nam" msprop:DbColumnName="Nam" msprop:design-time-name="2da6fe81-1a13-46df-82bc-2cb93ada60b9" type="xs:short" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Fact_BanHang" msprop:DbSchemaName="dbo" msprop:design-time-name="223059e9-a0e5-47eb-87fb-5d92e244e32e" msprop:FriendlyName="Fact_BanHang" msprop:TableType="Table" msprop:DbTableName="Fact_BanHang">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="MaThoiGian" msprop:FriendlyName="MaThoiGian" msprop:DbColumnName="MaThoiGian" msprop:design-time-name="aea4075f-3905-418a-963b-ad8538137fc6" type="xs:int" />
+                  <xs:element name="MaMatHang" msprop:FriendlyName="MaMatHang" msprop:DbColumnName="MaMatHang" msprop:design-time-name="7235933b-ad9e-44a7-9868-3e17ccea6ff9">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="MaKhachHang" msprop:FriendlyName="MaKhachHang" msprop:DbColumnName="MaKhachHang" msprop:design-time-name="0f94e16b-5d9e-4ae4-94f7-481ecbf4c8d8">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="DoanhThu" msprop:FriendlyName="DoanhThu" msprop:DbColumnName="DoanhThu" msprop:design-time-name="241c4027-507a-4855-a700-8611a05626ae" type="xs:decimal" />
+                  <xs:element name="SoLuongBan" msprop:FriendlyName="SoLuongBan" msprop:DbColumnName="SoLuongBan" msprop:design-time-name="be1611fb-9662-41fd-bedb-3d09c3c9c627" type="xs:int" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Fact_TonKho" msprop:DbSchemaName="dbo" msprop:design-time-name="03fa2bce-e905-4fcb-9e93-298b4524edee" msprop:FriendlyName="Fact_TonKho" msprop:TableType="Table" msprop:DbTableName="Fact_TonKho">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="MaThoiGian" msprop:FriendlyName="MaThoiGian" msprop:DbColumnName="MaThoiGian" msprop:design-time-name="f8101b90-70d3-483d-b002-c6ccc8e36884" type="xs:int" />
+                  <xs:element name="MaCuaHang" msprop:FriendlyName="MaCuaHang" msprop:DbColumnName="MaCuaHang" msprop:design-time-name="56046803-c11e-4013-b238-6b701f05ec12">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="MaMatHang" msprop:FriendlyName="MaMatHang" msprop:DbColumnName="MaMatHang" msprop:design-time-name="3f7bb253-96c3-4ab3-a6d8-f0b29aef877b">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="SoLuongTonKho" msprop:FriendlyName="SoLuongTonKho" msprop:DbColumnName="SoLuongTonKho" msprop:design-time-name="01ee6530-939c-43cb-a074-540f95d86f78" type="xs:int" />
+                  <xs:element name="GiaTriTonKho" msprop:FriendlyName="GiaTriTonKho" msprop:DbColumnName="GiaTriTonKho" msprop:design-time-name="71587351-1f95-42fd-a5a6-efd185561f8d" type="xs:decimal" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_Dim_VanPhongDaiDien" msprop:design-time-name="6022c1c2-6935-4aeb-86b8-b2deff4a1b0b" msprop:FriendlyName="Dim_VanPhongDaiDien" msprop:TableType="Table" msprop:DbSchemaName="dbo" msprop:DbTableName="Dim_VanPhongDaiDien">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="MaThanhPho" msprop:FriendlyName="MaThanhPho" msprop:DbColumnName="MaThanhPho" msprop:design-time-name="5f5556bf-7279-4c47-8e35-bbed716dd36a">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="10" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="TenThanhPho" msprop:FriendlyName="TenThanhPho" msprop:DbColumnName="TenThanhPho" msprop:design-time-name="92a4a9e1-67df-494f-97f8-500ca091d7fa">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="DiaChiVP" msprop:FriendlyName="DiaChiVP" msprop:DbColumnName="DiaChiVP" msprop:design-time-name="9f36b45b-f57f-4186-b14d-313259c6ae45">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="200" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Bang" msprop:FriendlyName="Bang" msprop:DbColumnName="Bang" msprop:design-time-name="4d5d0e50-a9f2-4614-a997-dc2724012459">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="100" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_CuaHang" />
+          <xs:field xpath="MaCuaHang" />
+        </xs:unique>
+        <xs:unique name="dbo_Dim_KhachHang_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_KhachHang" />
+          <xs:field xpath="MaKhachHang" />
+        </xs:unique>
+        <xs:unique name="dbo_Dim_MatHang_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_MatHang" />
+          <xs:field xpath="MaMatHang" />
+        </xs:unique>
+        <xs:unique name="dbo_Dim_ThoiGian_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_ThoiGian" />
+          <xs:field xpath="MaThoiGian" />
+        </xs:unique>
+        <xs:unique name="dbo_Fact_BanHang_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Fact_BanHang" />
+          <xs:field xpath="MaThoiGian" />
+          <xs:field xpath="MaMatHang" />
+          <xs:field xpath="MaKhachHang" />
+        </xs:unique>
+        <xs:unique name="dbo_Fact_TonKho_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Fact_TonKho" />
+          <xs:field xpath="MaThoiGian" />
+          <xs:field xpath="MaCuaHang" />
+          <xs:field xpath="MaMatHang" />
+        </xs:unique>
+        <xs:unique name="dbo_Dim_VanPhongDaiDien_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_Dim_VanPhongDaiDien" />
+          <xs:field xpath="MaThanhPho" />
+        </xs:unique>
+        <xs:keyref name="FK_TonKho_MatHang" refer="dbo_Dim_MatHang_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_TonKho" />
+          <xs:field xpath="MaMatHang" />
+        </xs:keyref>
+        <xs:keyref name="FK_TonKho_ThoiGian" refer="dbo_Dim_ThoiGian_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_TonKho" />
+          <xs:field xpath="MaThoiGian" />
+        </xs:keyref>
+        <xs:keyref name="FK_TonKho_CuaHang" refer="Constraint1">
+          <xs:selector xpath=".//dbo_Fact_TonKho" />
+          <xs:field xpath="MaCuaHang" />
+        </xs:keyref>
+        <xs:keyref name="FK_BanHang_MatHang" refer="dbo_Dim_MatHang_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_BanHang" />
+          <xs:field xpath="MaMatHang" />
+        </xs:keyref>
+        <xs:keyref name="FK_BanHang_ThoiGian" refer="dbo_Dim_ThoiGian_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_BanHang" />
+          <xs:field xpath="MaThoiGian" />
+        </xs:keyref>
+        <xs:keyref name="FK_BanHang_KhachHang" refer="dbo_Dim_KhachHang_Constraint1">
+          <xs:selector xpath=".//dbo_Fact_BanHang" />
+          <xs:field xpath="MaKhachHang" />
+        </xs:keyref>
+        <xs:keyref name="FK_CuaHang_VanPhong" refer="dbo_Dim_VanPhongDaiDien_Constraint1">
+          <xs:selector xpath=".//dbo_Dim_CuaHang" />
+          <xs:field xpath="MaThanhPho" />
+        </xs:keyref>
+      </xs:element>
+    </xs:schema>
+    <DATA_x0020_WAREHOUSE xmlns="" />
+  </Schema>
+</DataSourceView>

@@ -71,7 +71,6 @@ yarn-error.log*
 .vs/
 *.suo
 *.user
-cube/
 
 # ETL temp
 BTL-DW/layer_2/etl/tmp/

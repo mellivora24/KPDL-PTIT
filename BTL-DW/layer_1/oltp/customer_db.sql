@@ -7,8 +7,8 @@
 --   PR2: Khoa chinh dong thoi la khoa ngoai (tham chieu PR1)
 -- ============================================================
 
--- CREATE DATABASE CustomerDB;
--- GO
+CREATE DATABASE CustomerDB;
+GO
 
 USE CustomerDB;
 GO

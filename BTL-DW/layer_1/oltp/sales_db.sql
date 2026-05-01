@@ -10,8 +10,8 @@
 --        → Chuyen thanh quan he Nhieu-Nhieu (M:N)
 -- ============================================================
 
--- CREATE DATABASE SalesDB;
--- GO
+CREATE DATABASE SalesDB;
+GO
 
 USE SalesDB;
 GO
