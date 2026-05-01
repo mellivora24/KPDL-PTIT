@@ -55,8 +55,6 @@ yarn-error.log*
 *.tsv
 *.xlsx
 *.parquet
-*.json
-
 # database files
 *.db
 *.sqlite
@@ -131,3 +129,6 @@ __pycache__/
 *.pyc
 */.venv/
 venv/
+*.env
+*/.venv
+*.venv

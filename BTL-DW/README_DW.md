@@ -49,3 +49,33 @@
 | ----- | -------------------------------------------- |
 | SCD 0 | Không thay đổi sau khi tạo (immutable)       |
 | SCD 1 | Ghi đè trực tiếp khi có thay đổi (overwrite) |
+
+
+# Chạy kiểm tra
+
+Backend (FastAPI)
+
+- Activate the backend virtual environment first if you have one, then install dependencies:
+```powershell
+Set-Location BTL-DW\layer_4\backend
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+- Run server from the backend folder:
+```powershell
+uvicorn main:app --reload --port 8000
+```
+- If you do not want to activate the environment, use the backend venv Python directly:
+```powershell
+BTL-DW\layer_4\backend\.venv\Scripts\python -m uvicorn main:app --reload --port 8000
+```
+
+Frontend (React + Vite)
+
+- From `layer_4/frontend` run `npm install` then `npm run dev`
+- Open `http://localhost:5173` (vite default) and the frontend will call the backend at `http://localhost:8000/api/olap`.
+
+Notes
+- The backend reads `layer_4\.env` automatically and uses Windows Integrated Authentication by default.
+- Set `SSAS_SERVER=localhost` or your SSAS instance name, `SSAS_CATALOG=DW_SSAS`, and if needed `SSAS_ADOMD_DLL` to the path of `Microsoft.AnalysisServices.AdomdClient.dll`.
+- The dashboard uses live metadata from SSAS for cubes, measures, dimensions, levels, query, drill-down, and drill-up.
