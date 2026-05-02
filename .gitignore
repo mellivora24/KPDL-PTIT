@@ -134,3 +134,10 @@ venv/
 *.venv
 */.venv/*
 .venv/*
+
+*/data/*
+*.doc
+*Index
+*german*
+model/
+*svm*
