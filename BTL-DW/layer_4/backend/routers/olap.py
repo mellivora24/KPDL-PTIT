@@ -89,19 +89,30 @@ def drill(req: QueryRequest):
                 raise HTTPException(status_code=400, detail=str(e))
 
         if req.next_level:
-            result = service.drilldown_descendants(
-                req.cube,
-                measure,
-                parent_member,
-                req.next_level,
-                req.where
-            )
+            # Prefer .Children for one-level drills (safer); fall back to DESCENDANTS if needed
+            try:
+                result = service.drilldown_children(
+                    req.cube,
+                    measure,
+                    parent_member,
+                    req.where,
+                    req.next_level,
+                )
+            except Exception:
+                # fallback to descendants for multi-level or when .Children fails
+                result = service.drilldown_descendants(
+                    req.cube,
+                    measure,
+                    parent_member,
+                    req.next_level,
+                    req.where,
+                )
         else:
             result = service.drilldown_children(
                 req.cube,
                 measure,
                 parent_member,
-                req.where
+                req.where,
             )
 
         return {

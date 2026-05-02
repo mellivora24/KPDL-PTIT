@@ -3,6 +3,7 @@ from pathlib import Path
 import requests
 import xml.etree.ElementTree as ET
 from typing import Dict, Any
+import logging
 
 from dotenv import load_dotenv
 import clr
@@ -76,8 +77,25 @@ class SSASClient:
 			</soap:Envelope>'''
 
 		headers = {"Content-Type": "text/xml; charset=utf-8"}
-		resp = requests.post(self.xmla_url, data=envelope.encode("utf-8"), headers=headers, auth=self.auth, timeout=30)
-		resp.raise_for_status()
+		resp = None
+		try:
+			resp = requests.post(self.xmla_url, data=envelope.encode("utf-8"), headers=headers, auth=self.auth, timeout=30)
+			if resp.status_code >= 400:
+				logging.getLogger(__name__).error("XMLA error status %s for MDX:\n%s", resp.status_code, mdx)
+				# Try to include response body for diagnosis
+				body = resp.text if resp is not None else ""
+				raise RuntimeError(f"XMLA request failed with status {resp.status_code}:\n{body}\nMDX:\n{mdx}")
+			resp.raise_for_status()
+		except Exception as e:
+			# Log full traceback and include response content when available
+			logging.getLogger(__name__).exception("XMLA request failed for MDX:\n%s", mdx)
+			resp_text = ""
+			try:
+				if resp is not None:
+					resp_text = resp.text
+			except Exception:
+				resp_text = "<unavailable>"
+			raise RuntimeError(f"XMLA request failed: {e}\nResponse:\n{resp_text}\nMDX:\n{mdx}") from e
 
 		return self._parse_xmla_response(resp.content)
 
@@ -100,7 +118,8 @@ class SSASClient:
 					"rows": [list(row) for row in rows],
 				}
 		except Exception as exc:
-			raise RuntimeError(f"Không đọc được dữ liệu SSAS bằng Windows auth: {exc}") from exc
+			logging.getLogger(__name__).exception("Windows auth execute failed for MDX:\n%s", mdx)
+			raise RuntimeError(f"Không đọc được dữ liệu SSAS bằng Windows auth: {exc}\nMDX:\n{mdx}") from exc
 
 	def _parse_xmla_response(self, xml_bytes: bytes) -> Dict[str, Any]:
 		root = ET.fromstring(xml_bytes)
