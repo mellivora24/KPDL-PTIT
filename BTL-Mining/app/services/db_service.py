@@ -169,4 +169,18 @@ class DatabaseService:
         with self._connect() as conn:
             cursor = conn.cursor()
             cursor.execute(sql)
+            return [tuple(row) for row in cursor.fetchall()]
+
+    def fetch_pending_outcomes(self) -> list[tuple[int, str | None, int | float | None]]:
+        """Lấy danh sách các hồ sơ chưa có kết quả trả nợ (actual_outcome IS NULL)"""
+        sql = """
+            SELECT a.id, a.purpose, a.credit_amount
+            FROM applications a
+            LEFT JOIN outcomes o ON o.application_id = a.id
+            WHERE o.actual_outcome IS NULL OR o.id IS NULL
+            ORDER BY a.id DESC
+        """
+        with self._connect() as conn:
+            cursor = conn.cursor()
+            cursor.execute(sql)
             return cursor.fetchall()

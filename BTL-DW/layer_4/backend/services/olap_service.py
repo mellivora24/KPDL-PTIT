@@ -1,7 +1,7 @@
 from typing import Dict, Any, List, Optional
 import logging
 from ssas_client import SSASClient
-from mdx_builder import build_simple_mdx
+from mdx_builder import build_simple_mdx, build_pivot_mdx
 from mdx_builder import normalize_cube
 
 
@@ -72,6 +72,34 @@ class OLAPService:
             if r.get("DIMENSION_IS_VISIBLE") is not False
         ]
 
+    def list_hierarchies(self, cube: str, dimension_unique_name: Optional[str] = None) -> List[Dict[str, Any]]:
+        query = f"""
+        SELECT *
+        FROM $SYSTEM.MDSCHEMA_HIERARCHIES
+        WHERE CUBE_NAME = '{cube}'
+        """
+        result = self.client.execute_mdx(query)
+        rows = self._rows_as_dicts(result)
+
+        hierarchies = [
+            {
+                "name": r.get("HIERARCHY_NAME"),
+                "caption": r.get("HIERARCHY_CAPTION") or r.get("HIERARCHY_NAME"),
+                "unique_name": r.get("HIERARCHY_UNIQUE_NAME"),
+                "dimension_unique_name": r.get("DIMENSION_UNIQUE_NAME"),
+                "default_member": r.get("DEFAULT_MEMBER"),
+                "is_visible": r.get("HIERARCHY_IS_VISIBLE"),
+                "is_default": r.get("HIERARCHY_IS_DEFAULT"),
+            }
+            for r in rows
+            if r.get("HIERARCHY_IS_VISIBLE") is not False
+        ]
+
+        if dimension_unique_name:
+            return [h for h in hierarchies if h.get("dimension_unique_name") == dimension_unique_name]
+
+        return hierarchies
+
     def list_levels(self, cube: str, hierarchy: str) -> List[Dict[str, Any]]:
         query = f"""
         SELECT *
@@ -107,6 +135,22 @@ class OLAPService:
         limit: int = 20,
     ) -> Dict[str, Any]:
         mdx = build_simple_mdx(cube, measure, hierarchy, level, where, limit)
+        return self.client.execute_mdx(mdx)
+
+    def pivot(
+        self,
+        cube: str,
+        measure: str,
+        row_hierarchy: str,
+        row_level: Optional[str] = None,
+        col_hierarchy: Optional[str] = None,
+        where: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Pivot query: swap row and column hierarchies."""
+        if not col_hierarchy:
+            raise ValueError("col_hierarchy (pivot target) is required")
+        
+        mdx = build_pivot_mdx(cube, measure, row_hierarchy, row_level, col_hierarchy, None, where)
         return self.client.execute_mdx(mdx)
 
     # =========================

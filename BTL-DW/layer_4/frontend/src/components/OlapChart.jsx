@@ -97,7 +97,7 @@ export default function OlapChart({
   if (chartData.length === 0) {
     return (
       <div style={{
-        height: 340,
+        height: 250,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -107,7 +107,6 @@ export default function OlapChart({
         fontSize: '0.88rem',
         fontFamily: "'Be Vietnam Pro', sans-serif",
       }}>
-        <span style={{ fontSize: '2rem', opacity: 0.4 }}>📭</span>
         <span>Không có dữ liệu để hiển thị</span>
       </div>
     )
@@ -115,7 +114,7 @@ export default function OlapChart({
 
   return (
     <div className="chart-wrap">
-      <ResponsiveContainer width="100%" height={340}>
+      <ResponsiveContainer width="100%" height={250}>
         <BarChart
           data={chartData}
           margin={{ top: 12, right: 12, left: 4, bottom: 24 }}
@@ -174,15 +173,6 @@ export default function OlapChart({
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-
-      <div className="chart-footer">
-        {measureCaption && (
-          <span style={{ marginRight: 14 }}>
-            Chỉ số: <strong style={{ color: '#c0c0c0' }}>{measureCaption}</strong>
-          </span>
-        )}
-        <span>{chartData.length} mục · Nhấn vào cột để xem chi tiết tiếp theo</span>
-      </div>
     </div>
   )
 }

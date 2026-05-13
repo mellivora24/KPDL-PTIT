@@ -204,3 +204,35 @@ Sau khi One-shot encoding:
 | 3  |   0   |   0   |   1   |
 
 </div>
+
+# Pipeline training
+
+```mermaid
+flowchart TD
+    A[(Dữ liệu gốc UCI / raw)] --> B[Load & map target<br/>1 -> good, 2 -> bad]
+    B --> C[Chọn feature SVM]
+    C --> D[Train/test split]
+    D --> E[Tiền xử lý<br/>StandardScaler + OneHotEncoder]
+    E --> F[SVM classifier]
+    F --> G[Đánh giá<br/>precision, recall, f1, roc_auc]
+    G --> H[Lưu model<br/>model/svm_pipeline.joblib]
+    G --> I[Lưu metrics<br/>model/svm_metrics.json]
+```
+
+# Pipeline học lại
+
+```mermaid
+flowchart TD
+    A[PyQt app start] --> B[AutoRetrainService]
+    B --> C[Đếm feedback hợp lệ]
+    C --> D{Đủ số feedback mới?}
+    D -- Không --> E[Giữ nguyên model hiện tại]
+    D -- Có --> F[Load raw dataset]
+    F --> G[Đọc feedback rows từ DB]
+    G --> H[Chuyển feedback rows thành DataFrame]
+    H --> I[Gộp raw + feedback]
+    I --> J[Học lại bằng MLService.retrain_with_feedback]
+    J --> K[Fit lại pipeline]
+    K --> L[Cập nhật model + metrics]
+    L --> M[Cập nhật state auto_retrain]
+```

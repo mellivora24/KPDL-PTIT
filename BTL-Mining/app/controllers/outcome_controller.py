@@ -8,6 +8,10 @@ class OutcomeController:
     def __init__(self, db_service: DatabaseService) -> None:
         self.db_service = db_service
 
+    def get_pending_outcomes(self) -> list[tuple[int, str]]:
+        """Lấy danh sách các hồ sơ chưa cập nhật kết quả trả nợ"""
+        return self.db_service.fetch_pending_outcomes()
+
     def save_outcome(self, outcome: OutcomeInput) -> None:
         self.db_service.upsert_outcome(
             application_id=outcome.application_id,

@@ -4,7 +4,25 @@ import OlapChart from './components/OlapChart'
 
 const api = axios.create({ baseURL: 'http://localhost:8000/api/olap' })
 
-function normalizeResult(result) {
+function isFullHierarchyRef(value) {
+  const text = String(value || '').trim()
+  return text.startsWith('[') && text.includes('].[')
+}
+
+function resolveHierarchyRef(dim) {
+  const defaultHierarchy = dim?.default_hierarchy || ''
+  if (isFullHierarchyRef(defaultHierarchy)) return defaultHierarchy
+  if (isFullHierarchyRef(dim?.unique_name)) return dim.unique_name
+  return defaultHierarchy || dim?.unique_name || ''
+}
+
+function getDimensionKeyFromHierarchy(hierarchy) {
+  const text = String(hierarchy || '').trim()
+  const dimensionEnd = text.indexOf('].')
+  return dimensionEnd >= 0 ? `${text.slice(0, dimensionEnd + 1)}]` : ''
+}
+
+function normalizeResult(result, preferredMeasure = '') {
   const columns = result?.columns || []
   const rows = result?.rows || []
   const uniqueIndexes = columns
@@ -13,14 +31,49 @@ function normalizeResult(result) {
   const captionIndexes = columns
     .map((col, i) => (col.toUpperCase().includes('MEMBER_CAPTION') ? i : -1))
     .filter((i) => i >= 0)
-  const uniqueIndex = uniqueIndexes.length > 0 ? uniqueIndexes[uniqueIndexes.length - 1] : 0
-  const captionIndex = captionIndexes.length > 0 ? captionIndexes[captionIndexes.length - 1] : 0
-  const valueIndex = columns.length - 1
+  const uniqueIndex = uniqueIndexes.length > 0 ? uniqueIndexes[0] : 0
+  const captionIndex = captionIndexes.length > 0 ? captionIndexes[0] : 0
 
   const looksLikeMdxUniqueName = (v) => {
     const t = String(v || '').trim()
     return t.startsWith('[') && t.includes('].[')
   }
+
+  const normalizeHint = (value) => String(value || '')
+    .toLowerCase()
+    .replace(/[\[\].&]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  const measureHint = normalizeHint(preferredMeasure)
+  const excludedColumnPattern = /(MEMBER_UNIQUE_NAME|MEMBER_CAPTION|LEVEL_NUMBER|MEMBER_KEY|CHILDREN_CARDINALITY|PARENT_LEVEL|PARENT_UNIQUE_NAME)/i
+
+  const isNumericCell = (value) => {
+    if (value === null || value === undefined || value === '') return false
+    const normalized = String(value).replace(/\s/g, '').replace(/\./g, '').replace(',', '.')
+    return Number.isFinite(Number(normalized))
+  }
+
+  const candidateIndexes = columns
+    .map((column, index) => ({ column, index }))
+    .filter(({ column, index }) => !excludedColumnPattern.test(String(column || '')) && rows.some((row) => isNumericCell(row[index])))
+
+  const scoreCandidate = ({ column, index }) => {
+    const header = normalizeHint(column)
+    const sampleCount = rows.reduce((count, row) => count + (isNumericCell(row[index]) ? 1 : 0), 0)
+    let score = sampleCount
+    if (measureHint && header) {
+      if (header === measureHint) score += 1000
+      if (header.includes(measureHint)) score += 500
+      const measureTokens = measureHint.split(' ').filter(Boolean)
+      if (measureTokens.length > 0 && measureTokens.every((token) => header.includes(token))) score += 250
+    }
+    return score
+  }
+
+  const valueIndex = candidateIndexes.length > 0
+    ? candidateIndexes.sort((a, b) => scoreCandidate(b) - scoreCandidate(a))[0].index
+    : columns.length - 1
 
   const extractUniqueName = (row) => {
     const d = row[uniqueIndex]
@@ -31,15 +84,26 @@ function normalizeResult(result) {
   const extractCaption = (row) => {
     const d = row[captionIndex]
     if (d !== undefined && d !== null && String(d).trim() !== '') return d
-    return row.find((c) => c !== undefined && c !== null && String(c).trim() !== '') || ''
+    return row.find((c) => c !== undefined && c !== null && String(c).trim() !== '' && !looksLikeMdxUniqueName(c)) || ''
+  }
+
+  const parseNumericValue = (value) => {
+    if (value === null || value === undefined || value === '') return 0
+    if (typeof value === 'number') return value
+    const text = String(value).trim()
+    const normalized = text.includes(',') && text.includes('.')
+      ? text.replace(/\./g, '').replace(',', '.')
+      : text.replace(',', '.')
+    const parsed = Number(normalized)
+    return Number.isFinite(parsed) ? parsed : 0
   }
 
   const items = rows.map((row) => {
-    const value = Number(row[valueIndex])
+    const value = parseNumericValue(row[valueIndex])
     return {
       memberUniqueName: extractUniqueName(row),
       memberCaption: extractCaption(row),
-      value: Number.isFinite(value) ? value : 0,
+      value,
       raw: row,
     }
   })
@@ -69,6 +133,76 @@ export default function App() {
   const [result, setResult] = useState({ columns: [], rows: [], items: [], total: 0, max: 0, average: 0 })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [slicers, setSlicers] = useState({})
+  const [dimensionMembers, setDimensionMembers] = useState({})
+  const [expandedSlicerDim, setExpandedSlicerDim] = useState(null)
+  const [pivotTarget, setPivotTarget] = useState(null)
+
+  const buildWhereClause = (activeHierarchy = '') => {
+    const activeDimensionKey = getDimensionKeyFromHierarchy(activeHierarchy)
+    const whereTerms = Object.entries(slicers)
+      .filter(([dimensionKey, member]) => {
+        if (!member || !member.trim().startsWith('[')) return false
+        if (!activeDimensionKey) return true
+        return dimensionKey !== activeDimensionKey
+      })
+      .map(([_, member]) => member)
+    return whereTerms.length > 0 ? whereTerms.join(', ') : null
+  }
+
+  const loadDimensionMembers = async (cubeName, levelUniqueName, hierarchyUniqueName) => {
+    if (dimensionMembers[levelUniqueName]) return
+    try {
+      const response = await api.post('/query', {
+        cube: cubeName,
+        measure: selectedMeasure,
+        hierarchy: hierarchyUniqueName,
+        level: levelUniqueName,
+      })
+      const normalized = normalizeResult(response.data, selectedMeasure)
+      setDimensionMembers((prev) => ({
+        ...prev,
+        [levelUniqueName]: normalized.items,
+      }))
+    } catch (err) {
+      console.error('Failed to load members for', levelUniqueName, err)
+    }
+  }
+
+  const handleSliceChange = (dimensionUniqueName, memberUniqueName) => {
+    setSlicers((prev) => ({
+      ...prev,
+      [dimensionUniqueName]: memberUniqueName || '',
+    }))
+  }
+
+  const handlePivot = async (targetDimensionUniqueName) => {
+    if (!targetDimensionUniqueName) return
+    setLoading(true)
+    setError('')
+    try {
+      const where = buildWhereClause(selectedHierarchy)
+      const response = await api.post('/pivot', {
+        cube: selectedCube,
+        measure: selectedMeasure,
+        hierarchy: selectedHierarchy,
+        level: selectedLevel,
+        columns: [targetDimensionUniqueName],
+        where,
+      })
+      setResult(normalizeResult(response.data, selectedMeasure))
+      // Update selected hierarchy to the new pivot target
+      const targetDim = dimensions.find(d => d.unique_name === targetDimensionUniqueName)
+      if (targetDim) {
+        setSelectedHierarchy(resolveHierarchyRef(targetDim))
+      }
+      setPivotTarget(null)
+    } catch (err) {
+      setError(err?.response?.data?.detail || err.message || 'Không xoay chiều được.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const loadCube = async (cubeName) => {
     setLoading(true)
@@ -82,11 +216,14 @@ export default function App() {
       const nextDimensions = dimensionRes.data || []
       setMeasures(nextMeasures)
       setDimensions(nextDimensions)
+      setSlicers({})
+      setDimensionMembers({})
+      setExpandedSlicerDim(null)
 
       const measure = nextMeasures[0]?.unique_name || ''
       const guessUnit = (nextMeasures[0]?.caption || '').toLowerCase().includes('doanh') ? 'VND' : ''
       const dimension = nextDimensions[0] || {}
-      const hierarchy = dimension.default_hierarchy || dimension.unique_name || ''
+      const hierarchy = resolveHierarchyRef(dimension)
       setSelectedMeasure(measure)
       setSelectedUnit(guessUnit)
       setSelectedHierarchy(hierarchy)
@@ -114,8 +251,9 @@ export default function App() {
     setLoading(true)
     setError('')
     try {
-      const response = await api.post('/query', { cube: cubeName, measure, hierarchy, level })
-      setResult(normalizeResult(response.data))
+      const where = buildWhereClause(hierarchy)
+      const response = await api.post('/query', { cube: cubeName, measure, hierarchy, level, where })
+      setResult(normalizeResult(response.data, measure))
       setTrail(nextTrail)
     } catch (err) {
       setError(err?.response?.data?.detail || err.message || 'Không truy vấn được dữ liệu.')
@@ -136,6 +274,13 @@ export default function App() {
       .catch((err) => setError(err?.response?.data?.detail || err.message || 'Không kết nối được máy chủ.'))
   }, [])
 
+  // Auto-reload query when slicers change
+  useEffect(() => {
+    if (selectedCube && selectedMeasure && selectedHierarchy && selectedLevel) {
+      loadQuery(selectedCube, selectedMeasure, selectedHierarchy, selectedLevel, trail)
+    }
+  }, [slicers])
+
   const handleCubeChange = async (e) => {
     const cubeName = e.target.value
     setSelectedCube(cubeName)
@@ -155,6 +300,15 @@ export default function App() {
     const hierarchy = e.target.value
     setSelectedHierarchy(hierarchy)
     try {
+      const activeDimensionKey = getDimensionKeyFromHierarchy(hierarchy)
+      if (activeDimensionKey) {
+        setSlicers((prev) => {
+          if (!prev[activeDimensionKey]) return prev
+          const next = { ...prev }
+          delete next[activeDimensionKey]
+          return next
+        })
+      }
       const levelRes = await api.get(`/cubes/${selectedCube}/levels`, { params: { hierarchy } })
       const nextLevels = levelRes.data || []
       setLevels(nextLevels)
@@ -174,7 +328,11 @@ export default function App() {
   }
 
   const handleDrill = async (item) => {
-    const parentMember = item?.memberUniqueName || item?.memberCaption || ''
+    const uniqueName = item?.memberUniqueName || ''
+    const caption = item?.memberCaption || ''
+    const parentMember = uniqueName.startsWith('[Measures].') && !selectedHierarchy.startsWith('[Measures]')
+      ? caption
+      : (uniqueName || caption || '')
     if (!parentMember) {
       setError('Không lấy được thông tin để phân tích sâu hơn. Vui lòng thử lại.')
       return
@@ -205,7 +363,7 @@ export default function App() {
         parent_level: selectedLevel,
         next_level: nextLevel,
       })
-      setResult(normalizeResult(response.data))
+      setResult(normalizeResult(response.data, selectedMeasure))
       setSelectedLevel(nextLevel)
       setTrail(nextTrail)
     } catch (err) {
@@ -228,28 +386,20 @@ export default function App() {
   const measureCaption = measures.find((m) => m.unique_name === selectedMeasure)?.caption || selectedMeasure
 
   const kpiCards = [
-    { icon: '📊', label: 'Tổng giá trị', value: result.total, highlight: true },
-    { icon: '🏆', label: 'Giá trị cao nhất', value: result.max },
-    { icon: '📈', label: 'Trung bình', value: result.average },
-    { icon: '🗂️', label: 'Số mục dữ liệu', value: result.items.length, noUnit: true },
+    { label: 'Tổng giá trị', value: result.total, highlight: true },
+    { label: 'Giá trị cao nhất', value: result.max },
+    { label: 'Trung bình', value: result.average },
+    { label: 'Số mục dữ liệu', value: result.items.length, noUnit: true },
   ]
 
   return (
     <div className="app-shell">
       {/* ── SIDEBAR ── */}
       <aside className="sidebar">
-        <div className="brand-block">
-          <div className="brand-mark">BI</div>
-          <div>
-            <div className="eyebrow">Hệ thống báo cáo</div>
-            <h1>Phân tích dữ liệu</h1>
-          </div>
-        </div>
-
         <div className="sidebar-section-title">Cài đặt phân tích</div>
 
         <div className="control-group">
-          <label><span className="label-icon">🗄️</span> Nguồn dữ liệu</label>
+          <label>Nguồn dữ liệu</label>
           <select value={selectedCube} onChange={handleCubeChange}>
             {cubes.map((c) => (
               <option key={c.name} value={c.name}>{c.caption || c.name}</option>
@@ -258,7 +408,7 @@ export default function App() {
         </div>
 
         <div className="control-group">
-          <label><span className="label-icon">📐</span> Chỉ số đo lường</label>
+          <label>Chỉ số đo lường</label>
           <select value={selectedMeasure} onChange={handleMeasureChange}>
             {measures.map((m) => (
               <option key={m.unique_name} value={m.unique_name}>{m.caption || m.name}</option>
@@ -267,10 +417,10 @@ export default function App() {
         </div>
 
         <div className="control-group">
-          <label><span className="label-icon">🌐</span> Chiều phân tích</label>
+          <label>Chiều phân tích</label>
           <select value={selectedHierarchy} onChange={handleHierarchyChange}>
             {dimensions.map((d) => (
-              <option key={d.unique_name} value={d.default_hierarchy || d.unique_name}>
+              <option key={d.unique_name} value={resolveHierarchyRef(d)}>
                 {d.caption || d.name}
               </option>
             ))}
@@ -278,7 +428,7 @@ export default function App() {
         </div>
 
         <div className="control-group">
-          <label><span className="label-icon">🔍</span> Mức độ chi tiết</label>
+          <label>Mức độ chi tiết</label>
           <select value={selectedLevel} onChange={handleLevelChange}>
             {levels.map((l) => (
               <option key={l.unique_name} value={l.unique_name}>{l.caption || l.name}</option>
@@ -287,7 +437,7 @@ export default function App() {
         </div>
 
         <div className="control-group">
-          <label><span className="label-icon">💱</span> Đơn vị hiển thị</label>
+          <label>Đơn vị hiển thị</label>
           <select value={selectedUnit} onChange={(e) => setSelectedUnit(e.target.value)}>
             <option value="">(Tự động)</option>
             <option value="VND">VND</option>
@@ -297,15 +447,90 @@ export default function App() {
           </select>
         </div>
 
+        {/* Slicers section */}
+        <div className="sidebar-section-title" style={{ marginTop: '24px' }}>Bộ lọc dữ liệu</div>
+        {dimensions
+          .filter((d) => d.unique_name !== (selectedHierarchy || '').split('].')[0] + ']')
+          .map((dim) => (
+            <div key={dim.unique_name} className="control-group">
+              <button
+                type="button"
+                onClick={() => {
+                  setExpandedSlicerDim(expandedSlicerDim === dim.unique_name ? null : dim.unique_name)
+                  if (!expandedSlicerDim || expandedSlicerDim !== dim.unique_name) {
+                    const hierarchy = resolveHierarchyRef(dim)
+                    loadDimensionMembers(selectedCube, hierarchy, hierarchy)
+                  }
+                }}
+                style={{
+                  width: '100%',
+                  padding: '8px 10px',
+                  border: '1px solid #2f2f2f',
+                  background: '#0b0b0b',
+                  cursor: 'pointer',
+                  borderRadius: '6px',
+                  textAlign: 'left',
+                  fontSize: '14px',
+                  color: '#ffffff',
+                }}
+              >
+                {dim.caption || dim.name}
+              </button>
+              {expandedSlicerDim === dim.unique_name && (
+                <div style={{ marginTop: '8px', maxHeight: '200px', overflow: 'auto', border: '1px solid #2f2f2f', borderRadius: '6px', background: '#0b0b0b' }}>
+                  <button
+                    onClick={() => handleSliceChange(dim.unique_name, '')}
+                    style={{
+                      display: 'block',
+                      width: '100%',
+                      padding: '6px',
+                      border: 'none',
+                      background: '#0b0b0b',
+                      cursor: 'pointer',
+                      textAlign: 'left',
+                      fontSize: '12px',
+                      color: '#ffffff',
+                      fontWeight: 500,
+                    }}
+                  >
+                    Không lọc
+                  </button>
+                  {(dimensionMembers[resolveHierarchyRef(dim)] || []).map((member) => (
+                    <button
+                      key={member.memberUniqueName}
+                      onClick={() => handleSliceChange(dim.unique_name, member.memberUniqueName)}
+                      style={{
+                        display: 'block',
+                        width: '100%',
+                        padding: '6px',
+                        border: 'none',
+                        background: slicers[dim.unique_name] === member.memberUniqueName ? '#1f2937' : '#0b0b0b',
+                        cursor: 'pointer',
+                        textAlign: 'left',
+                        fontSize: '12px',
+                        color: '#ffffff',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.background = '#1a1a1a'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.background = slicers[dim.unique_name] === member.memberUniqueName ? '#1f2937' : '#0b0b0b'
+                      }}
+                    >
+                      {member.memberCaption}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+
         <div className="sidebar-tip">
-          <span className="sidebar-tip-icon">💡</span>
-          <p>
-            Nhấn vào một cột trên biểu đồ để xem chi tiết cấp tiếp theo. Bấm <strong>"Quay lại"</strong> để trở về cấp trên.
-          </p>
+          <p>Drilldown: bấm vào cột. Roll-up: dùng “Quay lại cấp trên”. Pivot: đổi chiều ở khối trên cùng. Slice &amp; Dice: chọn bộ lọc bên dưới.</p>
         </div>
 
         <button className="ghost-button" onClick={handleDrillUp} disabled={trail.length === 0}>
-          ← Quay lại cấp trên
+          Quay lại cấp trên
         </button>
       </aside>
 
@@ -317,11 +542,6 @@ export default function App() {
           <div>
             <span className="eyebrow">Phân tích thực tế</span>
             <h2>{cubes.find((c) => c.name === selectedCube)?.caption || selectedCube || 'Chưa chọn nguồn dữ liệu'}</h2>
-            <div className="hero-subtitle">
-              <span className="hero-tag">📐 {measureCaption || '—'}</span>
-              <span className="hero-tag">🔍 {levels.find((l) => l.unique_name === selectedLevel)?.caption || '—'}</span>
-              {selectedUnit && <span className="hero-tag">💱 {selectedUnit}</span>}
-            </div>
 
             {/* Breadcrumb trail */}
             {trail.length > 0 && (
@@ -334,18 +554,41 @@ export default function App() {
                 ))}
               </div>
             )}
-          </div>
 
-          <div className="status-pill">
-            <span className={`status-dot${loading ? ' loading' : ''}`} />
-            {loading ? 'Đang tải dữ liệu...' : 'Đã kết nối'}
+            {/* Pivot selector */}
+            <div style={{ marginTop: '12px', display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <select
+                value={pivotTarget || ''}
+                onChange={(e) => {
+                  const target = e.target.value
+                  if (target) handlePivot(target)
+                }}
+                style={{
+                  fontSize: '12px',
+                  padding: '4px 10px',
+                  border: '1px solid #2f2f2f',
+                  borderRadius: '4px',
+                  background: '#0b0b0b',
+                  color: '#ffffff',
+                  cursor: 'pointer',
+                }}
+              >
+                <option value="">Xoay chiều</option>
+                {dimensions
+                  .filter((d) => d.unique_name !== (selectedHierarchy || '').split('].')[0] + ']')
+                  .map((dim) => (
+                    <option key={dim.unique_name} value={resolveHierarchyRef(dim)}>
+                      {dim.caption || dim.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
           </div>
         </header>
 
         {/* Error */}
         {error && (
           <div className="error-banner">
-            <span className="error-icon">⚠️</span>
             <span>{error}</span>
           </div>
         )}
@@ -354,7 +597,6 @@ export default function App() {
         <section className="kpi-grid">
           {kpiCards.map((card) => (
             <article className="kpi-card" key={card.label}>
-              <span className="kpi-icon">{card.icon}</span>
               <span className="kpi-label">{card.label}</span>
               <strong className="kpi-value">
                 {fmt(card.value)}
@@ -372,10 +614,6 @@ export default function App() {
             <div className="panel-header">
               <div>
                 <span className="eyebrow">Biểu đồ phân tích</span>
-                <h3>{measureCaption || 'Chỉ số'} theo từng mục</h3>
-              </div>
-              <div className="panel-hint">
-                👆 Nhấn vào cột để xem chi tiết
               </div>
             </div>
             <OlapChart
